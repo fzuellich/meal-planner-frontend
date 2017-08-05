@@ -1,3 +1,4 @@
 <h1>My First AngularDart App</h1>
 
-<p>Hello {{name}}!</p>
+<board-browser [(selectedBoard)]="selectedBoard"></board-browser>
+<recipe-browser *ngIf="selectedBoard != null" [board]="selectedBoard"></recipe-browser>
