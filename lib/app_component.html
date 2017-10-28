@@ -2,3 +2,4 @@
 
 <board-browser [(selectedBoard)]="selectedBoard"></board-browser>
 <recipe-browser *ngIf="selectedBoard != null" [board]="selectedBoard"></recipe-browser>
+<timetable [timetableSlots]="timetableSlots"></timetable>

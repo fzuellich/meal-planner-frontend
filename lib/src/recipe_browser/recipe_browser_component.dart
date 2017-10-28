@@ -1,3 +1,4 @@
+import 'dart:html';
 import 'package:angular2/angular2.dart';
 
 import 'package:meal_planner_frontend/src/common/board.dart';
@@ -12,6 +13,8 @@ import 'package:meal_planner_frontend/src/common/recipe_service.dart';
   providers: const [RecipeService])
 
 class RecipeBrowserComponent {
+
+  static final String RECIPE_SELECTOR = '.recipe-browser__recipe';
 
   final RecipeService _recipeService;
 
