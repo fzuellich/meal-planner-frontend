@@ -1,7 +1,6 @@
 import 'package:angular2/angular2.dart';
 
 import '../common/timetable_slot.dart';
-import '../common/mock_timetable_slots.dart';
 
 @Component(
   selector: 'timetable',

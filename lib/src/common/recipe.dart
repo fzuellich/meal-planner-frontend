@@ -1,3 +1,5 @@
+import 'package:meal_planner_frontend/src/common/ingredient.dart';
+
 class Recipe {
   String _id;
 
@@ -5,7 +7,9 @@ class Recipe {
 
   String _description;
 
-  Recipe.withData(this._id, this._name, this._description);
+  List<Ingredient> _ingredients;
+
+  Recipe.withData(this._id, this._name, this._description, this._ingredients);
 
   String get id => _id;
 
@@ -23,6 +27,12 @@ class Recipe {
 
   set name(String value) {
     _name = value;
+  }
+
+  List<Ingredient> get ingredients => _ingredients;
+
+  set ingredients(List<Ingredient> value) {
+    _ingredients = value;
   }
 
 

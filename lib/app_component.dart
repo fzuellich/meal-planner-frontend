@@ -4,9 +4,11 @@ import 'package:angular_components/angular_components.dart';
 
 import 'package:dnd/dnd.dart';
 import 'package:meal_planner_frontend/src/common/board.dart';
+import 'package:meal_planner_frontend/src/common/ingredient.dart';
 import 'package:meal_planner_frontend/src/common/recipe_service.dart';
 import 'package:meal_planner_frontend/src/common/timetable_slot.dart';
 import 'package:meal_planner_frontend/src/recipe_browser/recipe_browser_component.dart';
+import 'package:meal_planner_frontend/src/shopping_list/shopping_list_component.dart';
 import 'src/board_browser/board_browser_component.dart';
 import 'package:meal_planner_frontend/src/timetable/timetable_component.dart';
 
@@ -14,12 +16,14 @@ import 'package:meal_planner_frontend/src/timetable/timetable_component.dart';
   selector: 'my-app',
   styleUrls: const ['app_component.css'],
   templateUrl: 'app_component.html',
-  directives: const [NgIf, materialDirectives, BoardBrowserComponent, RecipeBrowserComponent, TimetableComponent],
+  directives: const [NgIf, materialDirectives, BoardBrowserComponent, RecipeBrowserComponent, TimetableComponent, ShoppingListComponent],
   providers: const [materialProviders, RecipeService],
 )
 class AppComponent implements AfterViewChecked {
 
   RecipeService _recipeService;
+
+  List<Ingredient> listOfIngredients = [];
 
   AppComponent(this._recipeService);
 
@@ -72,6 +76,17 @@ class AppComponent implements AfterViewChecked {
     }
   }
 
+  void gatherIngredients() {
+    List<TimetableSlot> copyOfTimeTableSlots = new List.from(timetableSlots);
+    copyOfTimeTableSlots.removeWhere((slot) => slot.recipe == null);
+
+    List<Ingredient> finalListOfIngredients = new List();
+    copyOfTimeTableSlots.forEach((slot) {
+      finalListOfIngredients.addAll(slot.recipe.ingredients);
+    });
+
+    listOfIngredients = finalListOfIngredients;
+  }
 
   static List<TimetableSlot> _createTimeTableForNextWeek() {
     List<TimetableSlot> slotsForNextWeek = new List();
