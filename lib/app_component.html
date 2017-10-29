@@ -2,6 +2,10 @@
 
 <board-browser [(selectedBoard)]="selectedBoard"></board-browser>
 <recipe-browser *ngIf="selectedBoard != null" [board]="selectedBoard"></recipe-browser>
-<button (click)="gatherIngredients()">Gather ingredients</button>
+
+<h1>Your meal plan</h1>
 <timetable [timetableSlots]="timetableSlots"></timetable>
+
+<button (click)="gatherIngredients()">Gather ingredients</button>
+<h2>Your shopping list</h2>
 <shopping-list [ingredients]="listOfIngredients"></shopping-list>
