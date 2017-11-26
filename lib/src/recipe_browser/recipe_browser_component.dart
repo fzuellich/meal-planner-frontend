@@ -38,7 +38,11 @@ class RecipeBrowserComponent {
   RecipeBrowserComponent(this._recipeService);
 
   void getRecipes() {
-    _recipeService.getRecipes(board.id).then((recipes) => this.recipes = recipes);
+    _recipeService.getRecipes(board.id).then((recipes) {
+      this.recipes = recipes;
+      print(this.recipes);
+      this.recipes.forEach((recipe) => print(recipe.id));
+    });
   }
 
 }
