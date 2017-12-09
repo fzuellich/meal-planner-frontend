@@ -1,0 +1,18 @@
+.board-browser__list {
+    display: flex;
+}
+
+.board-browser__board {
+    background: #aaa;
+    width: 200px;
+    margin: 0 4px;
+    padding: 4px;
+}
+
+.board-browser__board:hover {
+    background: #eee;
+}
+
+.board-browser__board--selected, .board-browser__board--selected:hover {
+    background-color: yellow;
+}

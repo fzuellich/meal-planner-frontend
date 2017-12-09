@@ -1,0 +1,12 @@
+<div class="board-browser">
+    <div class="board-browser__header">
+        <h2>Browse boards:</h2>
+    </div>
+    <div class="board-browser__list">
+
+        <div class="board-browser__board board-browser__board--{{board.status}}" (click)="selectBoard(board)" *ngFor="let board of boards">
+            <h3>{{board.name}}</h3>
+            <p>{{board.description}}</p>
+        </div>
+    </div>
+</div>
