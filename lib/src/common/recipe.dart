@@ -7,9 +7,11 @@ class Recipe {
 
   String _description;
 
+  String _link;
+
   List<Ingredient> _ingredients;
 
-  Recipe.withData(this._id, this._name, this._description, this._ingredients);
+  Recipe.withData(this._id, this._name, this._description, this._link, this._ingredients);
 
   String get id => _id;
 
@@ -27,6 +29,12 @@ class Recipe {
 
   set name(String value) {
     _name = value;
+  }
+
+  String get link => _link;
+
+  set link(String value) {
+    _link = value;
   }
 
   List<Ingredient> get ingredients => _ingredients;

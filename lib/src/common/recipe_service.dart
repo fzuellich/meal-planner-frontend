@@ -49,6 +49,12 @@ class RecipeService {
   }
 
   Recipe _createRecipeFromJSON(var recipe) {
-    return new Recipe.withData(recipe['id'], recipe['name'], recipe['note'], []);
+    return new Recipe.withData(
+        recipe['id'],
+        recipe['name'],
+        recipe['note'],
+        recipe['original_link'],
+        []
+    );
   }
 }

@@ -5,6 +5,7 @@
         <div class="recipe-browser__recipe" [attr.data-recipeId]="recipe.id" *ngFor="let recipe of recipes">
             <h3 class="recipe__title">{{recipe.name}}</h3>
             <p class="recipe__description">{{recipe.description}}</p>
+            <p class="recipe__link"><a href="{{recipe.link}}" target="_blank">Open recipe.</a></p>
         </div>
     </div>
     <div *ngIf="recipes.isEmpty" class="recipe-browser__list">
