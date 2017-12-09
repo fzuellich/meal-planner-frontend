@@ -54,7 +54,6 @@ class AppComponent implements AfterViewChecked {
     }
 
     ElementList<Element> dropZones = querySelectorAll(TimetableComponent.DROPZONE_SELECTOR);
-    print(dropZones);
     Dropzone dropzone = new Dropzone(dropZones);
     dropzone.onDrop.listen((DropzoneEvent e) {
       final String recipeId = e.draggableElement.attributes['data-recipeId'];
