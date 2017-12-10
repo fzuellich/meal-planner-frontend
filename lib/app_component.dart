@@ -5,6 +5,7 @@ import 'package:angular_components/angular_components.dart';
 import 'package:dnd/dnd.dart';
 import 'package:meal_planner_frontend/src/common/board.dart';
 import 'package:meal_planner_frontend/src/common/ingredient.dart';
+import 'package:meal_planner_frontend/src/common/ingredient_service.dart';
 import 'package:meal_planner_frontend/src/common/recipe_service.dart';
 import 'package:meal_planner_frontend/src/common/timetable_slot.dart';
 import 'package:meal_planner_frontend/src/recipe_browser/recipe_browser_component.dart';
@@ -17,15 +18,19 @@ import 'package:meal_planner_frontend/src/timetable/timetable_component.dart';
   styleUrls: const ['app_component.css'],
   templateUrl: 'app_component.html',
   directives: const [NgIf, materialDirectives, BoardBrowserComponent, RecipeBrowserComponent, TimetableComponent, ShoppingListComponent],
-  providers: const [materialProviders, RecipeService],
+  providers: const [materialProviders, RecipeService, IngredientService],
 )
 class AppComponent implements AfterViewChecked {
 
+  String shoppingListProgressMessage = "";
+
   RecipeService _recipeService;
+
+  IngredientService _ingredientService;
 
   List<Ingredient> listOfIngredients = [];
 
-  AppComponent(this._recipeService);
+  AppComponent(this._recipeService, this._ingredientService);
 
   Dropzone _previousDropzone = null;
 
@@ -76,16 +81,19 @@ class AppComponent implements AfterViewChecked {
     }
   }
 
-  void gatherIngredients() {
+  void gatherIngredients() async {
     List<TimetableSlot> copyOfTimeTableSlots = new List.from(timetableSlots);
     copyOfTimeTableSlots.removeWhere((slot) => slot.recipe == null);
 
     List<Ingredient> finalListOfIngredients = new List();
-    copyOfTimeTableSlots.forEach((slot) {
-      finalListOfIngredients.addAll(slot.recipe.ingredients);
+    copyOfTimeTableSlots.forEach((slot) async {
+      shoppingListProgressMessage = "Gathering for recipe ${slot.recipe.name}...";
+      List<Ingredient> ingredients = await _ingredientService.getIngredients(slot.recipe);
+      finalListOfIngredients.addAll(ingredients);
     });
 
     listOfIngredients = finalListOfIngredients;
+    shoppingListProgressMessage = "Done.";
   }
 
   static List<TimetableSlot> _createTimeTableForNextWeek() {
