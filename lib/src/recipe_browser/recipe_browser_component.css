@@ -1,0 +1,32 @@
+.recipe-browser__list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.recipe-browser__recipe {
+    background: #eee;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    width: 20%;
+}
+
+.recipe-browser__recipe:hover {
+    background: #aaaaaa;
+}
+
+.recipe__description, .recipe__link {
+    color: #333;
+    font-size: 0.75rem;
+}
+
+.recipe__title {
+    border-left: 0.25rem solid;
+    padding-left: 0.25rem;
+    line-height: 1.75rem;
+    min-height: 5.5rem;
+}
+
+.recipe__title--undefined, .recipe__description--undefined {
+    color: #aaa;
+    font-style: italic;
+}
