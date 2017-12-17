@@ -1,3 +1,6 @@
 <ul class="shopping_list--ingredients">
-   <li *ngFor="let ingredient of ingredients">{{ingredient.name}}</li>
+   <li *ngFor="let ingredient of ingredients">
+      {{ingredient.amount}}x  {{ingredient.unit}} {{ingredient.name}}
+      <button type="button" (click)="removeIngredient(ingredient)">X</button>
+   </li>
 </ul>

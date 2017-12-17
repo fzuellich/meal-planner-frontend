@@ -19,6 +19,7 @@ class RecipeBrowserComponent {
   final RecipeService _recipeService;
 
   List<Recipe> recipes = [];
+  List<Recipe> displayRecipes = [];
 
   Board _board;
 
@@ -40,7 +41,16 @@ class RecipeBrowserComponent {
   void getRecipes() {
     _recipeService.getRecipes(board.id).then((recipes) {
       this.recipes = recipes;
+      this.displayRecipes = recipes;
     });
+  }
+
+  void filterRecipes(String value) {
+    displayRecipes = new List.from(recipes);
+
+    if (value != null && value.trim().isNotEmpty) {
+      displayRecipes.retainWhere((Recipe recipe) => recipe.name.toLowerCase().contains(value));
+    }
   }
 
 }

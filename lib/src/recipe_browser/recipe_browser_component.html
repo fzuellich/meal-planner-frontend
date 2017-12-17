@@ -1,8 +1,10 @@
 <div class="recipe-browser">
     <h2>Recipes</h2>
     <p>Board: {{board.name}}</p>
+    <label for="recipe-searchbar">Search</label>
+    <input #recipeFilter id="recipe-searchbar" type="text" (keyup)="filterRecipes(recipeFilter.value)" placeholder="chicken ..." />
     <div *ngIf="recipes.isNotEmpty" class="recipe-browser__list">
-        <div class="recipe-browser__recipe" [attr.data-recipeId]="recipe.id" *ngFor="let recipe of recipes">
+        <div class="recipe-browser__recipe" [attr.data-recipeId]="recipe.id" *ngFor="let recipe of displayRecipes">
             <h3 *ngIf="recipe.name?.isNotEmpty" class="recipe__title">{{recipe.name}}</h3>
             <h3 *ngIf="recipe.name?.isEmpty" class="recipe__title recipe__title--undefined">Untitled recipe</h3>
 

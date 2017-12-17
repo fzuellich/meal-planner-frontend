@@ -12,4 +12,8 @@ class ShoppingListComponent {
   @Input()
   List<Ingredient> ingredients;
 
+  void removeIngredient(Ingredient ingredient) {
+    ingredients.remove(ingredient);
+  }
+
 }
