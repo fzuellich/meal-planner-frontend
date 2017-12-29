@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:html';
 import 'package:angular2/angular2.dart';
 
@@ -21,6 +22,12 @@ class RecipeBrowserComponent {
   List<Recipe> recipes = [];
   List<Recipe> displayRecipes = [];
 
+
+
+  final _recipeChange = new StreamController<bool>();
+  @Output()
+  Stream<bool> get recipeChange => _recipeChange.stream;
+
   Board _board;
 
   @Input()
@@ -42,6 +49,7 @@ class RecipeBrowserComponent {
     _recipeService.getRecipes(board.id).then((recipes) {
       this.recipes = recipes;
       this.displayRecipes = recipes;
+      _recipeChange.add(true);
     });
   }
 

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:html';
 import 'package:angular2/angular2.dart';
 import 'package:angular_components/angular_components.dart';
@@ -22,35 +23,45 @@ import 'package:meal_planner_frontend/src/timetable/timetable_component.dart';
 )
 class AppComponent implements AfterViewChecked {
 
-  String shoppingListProgressMessage = "";
-
   RecipeService _recipeService;
-
   IngredientService _ingredientService;
 
+  Draggable _previousDraggable = null;
+  Dropzone _previousDropzone = null;
+  bool _recipeChanged = false;
+
   List<Ingredient> listOfIngredients = [];
+  Board selectedBoard = null;
+  String shoppingListProgressMessage = "";
+  List<TimetableSlot> timetableSlots = _createTimeTableForNextWeek();
 
   AppComponent(this._recipeService, this._ingredientService);
 
-  Dropzone _previousDropzone = null;
-
-  bool boardBrowserViewInit = false;
-
-  // Keep the last draggable so we can destroy it.
-  Draggable _previousDraggable = null;
-
-  Board selectedBoard = null;
-
-  List<TimetableSlot> timetableSlots = _createTimeTableForNextWeek();
+  /**
+   * Instead of writing a custom setter for the selectBoard property, w  String shoppingListProgressMessage = "";e rely on
+   * the event published by the RecipeBrowser component. In combination with the
+   * ngAfterViewChecked event, this is a more precise and easier version.
+   *
+   * For example we already know the recipes are loaded and therefore probably
+   * rendered by the browser.
+   */
+  void selectedBoardChanged() {
+    _recipeChanged = true;
+  }
 
   void createDraggable() {
-    if (_previousDraggable != null) {
+    if (_recipeChanged == false) {
       return;
+    }
+
+    if (_previousDraggable != null) {
+      _previousDraggable.destroy();
     }
 
     ElementList<Element> elements = querySelectorAll(RecipeBrowserComponent.RECIPE_SELECTOR);
     Draggable draggable = new Draggable(elements, avatarHandler: new AvatarHandler.clone());
     _previousDraggable = draggable;
+    _recipeChanged = false;
   }
 
   void createDropzone() {

@@ -1,7 +1,7 @@
 <h1>My First AngularDart App</h1>
 
-<board-browser [(selectedBoard)]="selectedBoard"></board-browser>
-<recipe-browser *ngIf="selectedBoard != null" [board]="selectedBoard"></recipe-browser>
+<board-browser dnd-retarget [(selectedBoard)]="selectedBoard"></board-browser>
+<recipe-browser *ngIf="selectedBoard != null" [board]="selectedBoard" (recipeChange)="selectedBoardChanged()"></recipe-browser>
 
 <h1>Your meal plan</h1>
 <timetable [timetableSlots]="timetableSlots"></timetable>
