@@ -9,3 +9,16 @@ body {
 * {
   font-family: Roboto, Helvetica, Arial, sans-serif;
 }
+
+@media print {
+
+  body {
+    margin: 0;
+    padding: 1vw;
+    width: 40vw;
+  }
+
+  .no-print {
+    display: none;
+  }
+}

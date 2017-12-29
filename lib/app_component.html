@@ -1,12 +1,17 @@
-<h1>My First AngularDart App</h1>
+<div class="no-print">
+    <h1>My First AngularDart App</h1>
 
-<board-browser dnd-retarget [(selectedBoard)]="selectedBoard"></board-browser>
-<recipe-browser *ngIf="selectedBoard != null" [board]="selectedBoard" (recipeChange)="selectedBoardChanged()"></recipe-browser>
+    <board-browser [(selectedBoard)]="selectedBoard"></board-browser>
 
-<h1>Your meal plan</h1>
-<timetable [timetableSlots]="timetableSlots"></timetable>
+    <recipe-browser *ngIf="selectedBoard != null" [board]="selectedBoard" (recipeChange)="selectedBoardChanged()"></recipe-browser>
 
-<button (click)="gatherIngredients()">Gather ingredients</button>
-<h2>Your shopping list</h2>
-<p>{{shoppingListProgressMessage}}</p>
+    <h1>Your meal plan</h1>
+    <timetable [timetableSlots]="timetableSlots"></timetable>
+
+    <button (click)="gatherIngredients()">Gather ingredients</button>
+</div>
+
+<h2 class="shopping-list--headline">Your shopping list</h2>
+<p class="no-print">{{shoppingListProgressMessage}}</p>
 <shopping-list [ingredients]="listOfIngredients"></shopping-list>
+
