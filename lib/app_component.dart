@@ -4,21 +4,21 @@ import 'package:angular2/angular2.dart';
 import 'package:angular_components/angular_components.dart';
 
 import 'package:dnd/dnd.dart';
+import 'package:meal_planner_frontend/src/common/app_components.dart';
 import 'package:meal_planner_frontend/src/common/board.dart';
 import 'package:meal_planner_frontend/src/common/ingredient.dart';
+import 'package:meal_planner_frontend/src/common/ingredient_retrieval_status.dart';
 import 'package:meal_planner_frontend/src/common/ingredient_service.dart';
 import 'package:meal_planner_frontend/src/common/recipe_service.dart';
 import 'package:meal_planner_frontend/src/common/timetable_slot.dart';
 import 'package:meal_planner_frontend/src/recipe_browser/recipe_browser_component.dart';
-import 'package:meal_planner_frontend/src/shopping_list/shopping_list_component.dart';
-import 'src/board_browser/board_browser_component.dart';
 import 'package:meal_planner_frontend/src/timetable/timetable_component.dart';
 
 @Component(
   selector: 'my-app',
   styleUrls: const ['app_component.css'],
   templateUrl: 'app_component.html',
-  directives: const [NgIf, materialDirectives, BoardBrowserComponent, RecipeBrowserComponent, TimetableComponent, ShoppingListComponent],
+  directives: const [NgIf, materialDirectives, APP_COMPONENTS],
   providers: const [materialProviders, RecipeService, IngredientService],
 )
 class AppComponent implements AfterViewChecked {
@@ -30,9 +30,9 @@ class AppComponent implements AfterViewChecked {
   Dropzone _previousDropzone = null;
   bool _recipeChanged = false;
 
+  List<IngredientRetrievalStatus> ingredientRetrievalStatus = [];
   List<Ingredient> listOfIngredients = [];
   Board selectedBoard = null;
-  String shoppingListProgressMessage = "";
   List<TimetableSlot> timetableSlots = _createTimeTableForNextWeek();
 
   AppComponent(this._recipeService, this._ingredientService);
@@ -92,19 +92,27 @@ class AppComponent implements AfterViewChecked {
     }
   }
 
-  void gatherIngredients() async {
+  Future gatherIngredients() async {
+    ingredientRetrievalStatus = [];
     List<TimetableSlot> copyOfTimeTableSlots = new List.from(timetableSlots);
     copyOfTimeTableSlots.removeWhere((slot) => slot.recipe == null);
 
     List<Ingredient> finalListOfIngredients = new List();
     copyOfTimeTableSlots.forEach((slot) async {
-      shoppingListProgressMessage = "Gathering for recipe ${slot.recipe.name}...";
+      IngredientRetrievalStatus status = new IngredientRetrievalStatus();
+      ingredientRetrievalStatus.add(status);
+      status.info = "Gathering ingredients...";
+      status.recipe = slot.recipe;
+      status.failed = false;
+
       List<Ingredient> ingredients = await _ingredientService.getIngredients(slot.recipe);
+      status.info = "Found ${ingredients.length} ingredients.";
+      status.failed = ingredients.isEmpty;
+
       finalListOfIngredients.addAll(ingredients);
     });
 
     listOfIngredients = finalListOfIngredients;
-    shoppingListProgressMessage = "Done.";
   }
 
   static List<TimetableSlot> _createTimeTableForNextWeek() {

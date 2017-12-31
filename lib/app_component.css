@@ -5,3 +5,15 @@
 .shopping-list--headline {
     margin-top: 0;
 }
+
+.result-wrapper {
+    display: flex;
+}
+
+.result-wrapper--shopping-list, .result-wrapper--status-list {
+    width: 45vw;
+}
+
+.result-wrapper--shopping-list {
+    margin-right: 4vw;
+}

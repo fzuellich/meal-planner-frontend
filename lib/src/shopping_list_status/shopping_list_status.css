@@ -1,0 +1,18 @@
+.status-list__entry {
+    background: rgba(0, 255, 0, 0.15);
+    color: rgb(0, 255, 0);
+}
+
+.status-list__entry--failed {
+    background: rgba(255, 0, 0, 0.15);
+    color: rgb(255, 0, 0);
+}
+
+.status-list__text {
+    margin: 0;
+    padding: 0.5rem
+}
+
+.status-list__link {
+    color: #000;
+}

@@ -11,7 +11,12 @@
     <button (click)="gatherIngredients()">Gather ingredients</button>
 </div>
 
-<h2 class="shopping-list--headline">Your shopping list</h2>
-<p class="no-print">{{shoppingListProgressMessage}}</p>
-<shopping-list [ingredients]="listOfIngredients"></shopping-list>
-
+<div class="result-wrapper">
+    <div class="result-wrapper--shopping-list">
+        <h2 class="shopping-list--headline">Your shopping list</h2>
+        <shopping-list [ingredients]="listOfIngredients"></shopping-list>
+    </div>
+    <div class="result-wrapper--status-list no-print">
+        <shopping-list-status [status]="ingredientRetrievalStatus"></shopping-list-status>
+    </div>
+</div>

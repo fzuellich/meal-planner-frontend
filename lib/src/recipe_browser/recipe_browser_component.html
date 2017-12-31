@@ -5,12 +5,15 @@
     <input #recipeFilter id="recipe-searchbar" type="text" (keyup)="filterRecipes(recipeFilter.value)" placeholder="chicken ..." />
     <div *ngIf="recipes.isNotEmpty" class="recipe-browser__list">
         <div class="recipe-browser__recipe" [attr.data-recipeId]="recipe.id" *ngFor="let recipe of displayRecipes">
-            <h3 *ngIf="recipe.name?.isNotEmpty" class="recipe__title">{{recipe.name}}</h3>
-            <h3 *ngIf="recipe.name?.isEmpty" class="recipe__title recipe__title--undefined">Untitled recipe</h3>
+            <h3 class="recipe__title"
+                [class.recipe__title--undefined]="recipe.name?.isEmpty">
+                {{recipe|recipeName:'short'}}
+            </h3>
 
-            <p *ngIf="recipe.description?.isNotEmpty" class="recipe__description">{{recipe.description}}</p>
-            <p *ngIf="recipe.description?.isEmpty"
-               class="recipe__description recipe__description--undefined">No description given.</p>
+            <p class="recipe__description"
+               [class.recipe__title--undefined]="recipe.description.isEmpty">
+                {{recipe.description|replace:'':'No description given.'}}
+            </p>
 
             <p class="recipe__link"><a href="{{recipe.link}}" target="_blank">Open recipe.</a></p>
         </div>

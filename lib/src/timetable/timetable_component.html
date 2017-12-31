@@ -3,7 +3,7 @@
     <div *ngFor="let slot of timetableSlots; let index=index;" class="timetable--slot" [attr.data-dropzoneIndex]="index">
         <h2>{{slot.date|date:'E., dd.MM.y'}}</h2>
         <div *ngIf="slot.recipe != null">
-            <p>{{slot.recipe.name}}</p>
+            <p>{{slot.recipe|recipeName:'short'}}</p>
             <p>{{slot.recipe.description}}</p>
         </div>
     </div>

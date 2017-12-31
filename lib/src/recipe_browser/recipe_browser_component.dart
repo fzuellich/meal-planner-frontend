@@ -4,6 +4,7 @@ import 'package:angular2/angular2.dart';
 
 import 'package:meal_planner_frontend/src/common/board.dart';
 import 'package:meal_planner_frontend/src/common/recipe.dart';
+import 'package:meal_planner_frontend/src/common/recipe_name_pipe.dart';
 import 'package:meal_planner_frontend/src/common/recipe_service.dart';
 
 @Component(
@@ -11,6 +12,7 @@ import 'package:meal_planner_frontend/src/common/recipe_service.dart';
   templateUrl: 'recipe_browser_component.html',
   styleUrls: const ['recipe_browser_component.css'],
   directives: const [NgFor, NgIf],
+  pipes: const [ReplacePipe, RecipeNamePipe],
   providers: const [RecipeService])
 
 class RecipeBrowserComponent {

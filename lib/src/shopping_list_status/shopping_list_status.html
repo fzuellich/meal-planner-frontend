@@ -1,0 +1,15 @@
+<div class="status-list" *ngIf="status.isNotEmpty">
+    <h2>Status:</h2>
+    <div *ngFor="let s of status">
+        <div class="status-list__entry"
+             [class.status-list__entry--failed]="s.failed">
+            <p class="status-list__text">
+                <a
+                   href="{{s.recipe?.link}}"
+                   target="_blank"
+                   class="status-list__link">{{s.recipe|recipeName:'long'}}</a>
+                {{s.info}}
+            </p>
+        </div>
+    </div>
+</div>
