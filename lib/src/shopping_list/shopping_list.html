@@ -1,11 +1,13 @@
 <ul class="shopping_list--ingredients">
    <li *ngFor="let item of shoppingListItems" (dblclick)="onDoubleClick(item)">
-       <p *ngIf="editableItem == item">
-           <input type="text"
-                  placeholder="{{item.value}}"
-                  value="{{item.value}}"
-                  (keyup)="onKeyUpInInput($event)" />
-       </p>
+       <form *ngIf="editableItem == item" (ngSubmit)="onItemEdited()" #editForm="ngForm">
+           <textarea *ngIf="editableItem == item"
+                     placeholder="{{item.value}}"
+                     [(ngModel)]="item.value"
+                     id="itemvalue"
+                     ngControl="itemvalue"></textarea>
+           <button type="submit">ok</button>
+       </form>
 
        <p *ngIf="editableItem != item">
            {{item.value}}

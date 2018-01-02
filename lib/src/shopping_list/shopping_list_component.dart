@@ -23,8 +23,8 @@ class ShoppingListComponent {
     editableItem = item;
   }
 
-  void onKeyUpInInput(var event) {
-
+  void onItemEdited() {
+    editableItem = null;
   }
 
 }
