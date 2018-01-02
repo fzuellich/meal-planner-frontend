@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:html';
-import 'package:angular2/angular2.dart';
+import 'package:angular/angular.dart';
 
 import 'package:meal_planner_frontend/src/common/board.dart';
 import 'package:meal_planner_frontend/src/common/recipe.dart';

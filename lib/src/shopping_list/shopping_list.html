@@ -1,6 +1,15 @@
 <ul class="shopping_list--ingredients">
-   <li *ngFor="let ingredient of ingredients">
-      {{ingredient.amount}}x  {{ingredient.unit}} {{ingredient.name}}
-      <button type="button" (click)="removeIngredient(ingredient)" class="no-print">X</button>
+   <li *ngFor="let item of shoppingListItems" (dblclick)="onDoubleClick(item)">
+       <p *ngIf="editableItem == item">
+           <input type="text"
+                  placeholder="{{item.value}}"
+                  value="{{item.value}}"
+                  (keyup)="onKeyUpInInput($event)" />
+       </p>
+
+       <p *ngIf="editableItem != item">
+           {{item.value}}
+           <button type="button" (click)="removeItem(item)" class="no-print">X</button>
+       </p>
    </li>
 </ul>

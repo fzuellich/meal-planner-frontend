@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:html';
 import 'dart:convert';
-import 'package:angular2/angular2.dart';
+import 'package:angular/angular.dart';
 
 import 'board.dart';
 import 'mock_boards.dart';

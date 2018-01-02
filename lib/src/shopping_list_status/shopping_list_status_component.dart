@@ -1,4 +1,4 @@
-import 'package:angular2/angular2.dart';
+import 'package:angular/angular.dart';
 import 'package:meal_planner_frontend/src/common/ingredient_retrieval_status.dart';
 import 'package:meal_planner_frontend/src/common/recipe_name_pipe.dart';
 
