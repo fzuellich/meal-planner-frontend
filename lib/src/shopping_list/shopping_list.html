@@ -9,7 +9,11 @@
            <button type="submit">ok</button>
        </form>
 
-       <p *ngIf="editableItem != item">
+       <p *ngIf="quickEditItem == item">
+           <quick-edit [shoppingItem]="item"></quick-edit>
+       </p>
+
+       <p *ngIf="editableItem != item && quickEditItem != item" (mouseenter)="renderQuickEdit(item)">
            {{item.value}}
            <button type="button" (click)="removeItem(item)" class="no-print">X</button>
        </p>
