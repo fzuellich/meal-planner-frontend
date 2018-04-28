@@ -1,0 +1,11 @@
+.quick-edit--item {
+    background: #eee;
+    display: inline;
+    margin: 4px;
+}
+
+.quick-edit--item:hover {
+    background: #ff22ff;
+    display: inline;
+    margin: 4px;
+}

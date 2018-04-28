@@ -8,6 +8,7 @@ import 'package:meal_planner_frontend/src/common/board.dart';
 import 'package:meal_planner_frontend/src/common/ingredient.dart';
 import 'package:meal_planner_frontend/src/common/ingredient_retrieval_status.dart';
 import 'package:meal_planner_frontend/src/common/ingredient_service.dart';
+import 'package:meal_planner_frontend/src/common/recipe.dart';
 import 'package:meal_planner_frontend/src/common/recipe_service.dart';
 import 'package:meal_planner_frontend/src/common/shoppping_list_item.dart';
 import 'package:meal_planner_frontend/src/common/timetable_slot.dart';
@@ -22,6 +23,8 @@ import 'package:meal_planner_frontend/src/timetable/timetable_component.dart';
   providers: const [RecipeService, IngredientService],
 )
 class AppComponent implements AfterViewChecked {
+
+  static const bool DEBUG_MODE = true;
 
   RecipeService _recipeService;
   IngredientService _ingredientService;
@@ -97,7 +100,6 @@ class AppComponent implements AfterViewChecked {
     List<TimetableSlot> copyOfTimeTableSlots = new List.from(timetableSlots);
     copyOfTimeTableSlots.removeWhere((slot) => slot.recipe == null);
 
-    List<Ingredient> listOfIngredients = new List();
     await copyOfTimeTableSlots.forEach((slot) async {
       IngredientRetrievalStatus status = new IngredientRetrievalStatus();
       ingredientRetrievalStatus.add(status);

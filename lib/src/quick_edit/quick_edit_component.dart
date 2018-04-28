@@ -1,47 +1,35 @@
 import 'package:angular/angular.dart';
 import 'package:angular_forms/angular_forms.dart' show formDirectives;
 import 'package:meal_planner_frontend/src/common/shoppping_list_item.dart';
+import 'package:meal_planner_frontend/src/quick_edit/quick_edit_split_service.dart';
 
 @Component(
   selector: 'quick-edit',
+  styleUrls: const ['quick_edit.css'],
   templateUrl: 'quick_edit.html',
   directives: const [NgIf, NgFor, formDirectives],
+  providers: const [QuickEditSplitService]
 )
 class QuickEditComponent implements OnInit {
 
   @Input()
   ShoppingListItem shoppingItem;
 
+  QuickEditSplitService _splitService;
+
+  List<String> parts;
+
+  QuickEditComponent(this._splitService);
+
   void ngOnInit() {
-    List<String> something = _splitApart("hello world (optional)");
-    print(something);
-    assert(something == ["hello world", "(optional)"]);
-
-    something = _splitApart("1 0x LB (4.5KG) ripe plum tomatoes (such as Romas, Amish pastes, and San Marzanos), not important");
-    print(something);
-    assert(something == ["1 0x LB", "(4.5KG) ripe plum tomatoes", "(such as Romas, Amish pastes, and San Marzanos)", ", not important"]);
+    parts = _splitService.splitApart(shoppingItem.value);
   }
 
-  List<String> _splitApart(String input) {
-    int indexOfOpeningBracket = input.indexOf('(');
-    int indexOfClosingBracket = input.indexOf(')');
-
-    bool hasOpeningBracket = indexOfOpeningBracket != -1;
-    bool hasClosingBracket = indexOfClosingBracket != -1;
-
-    if (!hasOpeningBracket || !hasClosingBracket) {
-      return [input];
-    }
-
-    List<String> result = new List();
-    result.add(input.substring(0, indexOfOpeningBracket));
-    result.add(input.substring(indexOfOpeningBracket, indexOfClosingBracket + 1));
-
-    if (input.substring(indexOfClosingBracket + 1).isNotEmpty) {
-      result.add(input.substring(indexOfClosingBracket + 1));
-    }
-
-    return result;
+  void removePart(index) {
+    parts.removeAt(index);
   }
 
+  void save() {
+    shoppingItem.value = parts.join();
+  }
 }
