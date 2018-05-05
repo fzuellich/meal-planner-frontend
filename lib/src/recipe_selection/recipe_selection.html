@@ -1,0 +1,6 @@
+<div class="recipe-selection">
+    <h1 class="recipe-selection__title">Selected recipes</h1>
+    <div class="recipe-selection__entry">
+        <p *ngFor="let recipe of recipes" (click)="removeRecipeFromSelection(recipe)">{{recipe|recipeName:'short'}}</p>
+    </div>
+</div>

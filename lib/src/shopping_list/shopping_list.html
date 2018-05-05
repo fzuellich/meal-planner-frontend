@@ -11,11 +11,11 @@
 
        <p *ngIf="quickEditItem == item">
            <quick-edit [shoppingItem]="item"></quick-edit>
+           <button type="button" (click)="removeItem(item)" class="no-print">Remove ingredient</button>
        </p>
 
        <p *ngIf="editableItem != item && quickEditItem != item" (mouseenter)="renderQuickEdit(item)">
            {{item.value}}
-           <button type="button" (click)="removeItem(item)" class="no-print">X</button>
        </p>
    </li>
 </ul>

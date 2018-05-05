@@ -1,23 +1,30 @@
-<div class="no-print">
-    <h1>My First AngularDart App</h1>
-    <a href="/connect">Connect with Pinterest</a>
+<div class="app-grid">
+    <div class="no-print app-grid-main">
+        <h1>Meal planner</h1>
+        <a href="/connect">Connect with Pinterest</a>
 
-    <board-browser [(selectedBoard)]="selectedBoard"></board-browser>
+        <board-browser [(selectedBoard)]="selectedBoard"></board-browser>
 
-    <recipe-browser *ngIf="selectedBoard != null" [board]="selectedBoard" (recipeChange)="selectedBoardChanged()"></recipe-browser>
-
-    <h1>Your meal plan</h1>
-    <timetable [timetableSlots]="timetableSlots"></timetable>
-
-    <button (click)="gatherIngredients()">Gather ingredients</button>
-</div>
-
-<div class="result-wrapper">
-    <div class="result-wrapper--shopping-list">
-        <h2 class="shopping-list--headline">Your shopping list</h2>
-        <shopping-list [shoppingListItems]="shoppingListItems"></shopping-list>
+        <recipe-browser *ngIf="selectedBoard != null"
+                        [board]="selectedBoard"
+                        (recipeSelected)="addSelectedRecipeToList($event)"></recipe-browser>
     </div>
-    <div class="result-wrapper--status-list no-print">
-        <shopping-list-status [status]="ingredientRetrievalStatus"></shopping-list-status>
+
+    <div class="app-grid-sidebar">
+        <recipe-selection [recipes]="selectedRecipes" (recipeRemoved)="removeRecipeFromSelection($event)"></recipe-selection>
+        <button (click)="gatherIngredients()">Gather ingredients</button>
+
+        <div class="result-wrapper--status-list no-print">
+            <shopping-list-status [status]="ingredientRetrievalStatus"></shopping-list-status>
+        </div>
+    </div>
+
+    <div class="app-grid-footer">
+        <div class="result-wrapper">
+            <div class="result-wrapper--shopping-list">
+                <h2 class="shopping-list--headline">Your shopping list</h2>
+                <shopping-list [shoppingListItems]="shoppingListItems"></shopping-list>
+            </div>
+        </div>
     </div>
 </div>

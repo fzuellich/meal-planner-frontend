@@ -5,6 +5,7 @@
 }
 
 .quick-edit--item:hover {
+    cursor: pointer;
     background: #ff22ff;
     display: inline;
     margin: 4px;

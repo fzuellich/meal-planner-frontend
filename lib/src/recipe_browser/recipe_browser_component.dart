@@ -24,8 +24,6 @@ class RecipeBrowserComponent {
   List<Recipe> recipes = [];
   List<Recipe> displayRecipes = [];
 
-
-
   final _recipeChange = new StreamController<bool>();
   @Output()
   Stream<bool> get recipeChange => _recipeChange.stream;
@@ -63,4 +61,11 @@ class RecipeBrowserComponent {
     }
   }
 
+  final _selectedRecipe = new StreamController<Recipe>();
+  @Output()
+  Stream<Recipe> get recipeSelected => _selectedRecipe.stream;
+
+  void addRecipe(Recipe recipe) {
+    _selectedRecipe.add(recipe);
+  }
 }

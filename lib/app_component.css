@@ -17,3 +17,16 @@
 .result-wrapper--shopping-list {
     margin-right: 4vw;
 }
+
+.app-grid {
+    display: grid;
+    grid-template-columns: 75% 25%;
+    grid-template-rows: 75% auto;
+}
+
+.app-grid-sidebar {
+    grid-row-start: 1;
+    grid-row-end: 3;
+    grid-column-start: 2;
+    grid-column-end: 3;
+}

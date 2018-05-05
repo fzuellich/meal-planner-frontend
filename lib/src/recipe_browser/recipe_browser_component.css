@@ -12,6 +12,7 @@
 
 .recipe-browser__recipe:hover {
     background: #aaaaaa;
+    cursor: pointer;
 }
 
 .recipe__description, .recipe__link {

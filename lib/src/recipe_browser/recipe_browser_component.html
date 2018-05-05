@@ -4,7 +4,7 @@
     <label for="recipe-searchbar">Search</label>
     <input #recipeFilter id="recipe-searchbar" type="text" (keyup)="filterRecipes(recipeFilter.value)" placeholder="chicken ..." />
     <div *ngIf="recipes.isNotEmpty" class="recipe-browser__list">
-        <div class="recipe-browser__recipe" [attr.data-recipeId]="recipe.id" *ngFor="let recipe of displayRecipes">
+        <div class="recipe-browser__recipe" [attr.data-recipeId]="recipe.id" *ngFor="let recipe of displayRecipes" (dblclick)="addRecipe(recipe)">
             <h3 class="recipe__title"
                 [class.recipe__title--undefined]="recipe.name?.isEmpty">
                 {{recipe|recipeName:'short'}}
