@@ -30,3 +30,21 @@
     grid-column-start: 2;
     grid-column-end: 3;
 }
+
+.welcome-panel {
+    background: #eee;
+    padding: 1rem;
+    margin: 0 auto;
+    width: 600px;
+}
+
+.welcome-panel__button-wrapper {
+    text-align: center;
+}
+
+.welcome-panel__button {
+    background: #333;
+    color: #eee;
+    display: inline-block;
+    padding: 0.5rem;
+}

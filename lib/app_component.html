@@ -1,7 +1,14 @@
-<div class="app-grid">
+<div *ngIf="!loggedIn" class="welcome-panel">
+    <h1>Authorize us to access Pinterest...</h1>
+    <p>Before you can use this app, you have to authorize use to access your public Pinterest boards and pins:</p>
+    <p class="welcome-panel__button-wrapper">
+        <a href="/connect" class="welcome-panel__button">Authorize with Pinterest</a>
+    </p>
+</div>
+
+<div *ngIf="loggedIn" class="app-grid">
     <div class="no-print app-grid-main">
         <h1>Meal planner</h1>
-        <a href="/connect">Connect with Pinterest</a>
 
         <board-browser [(selectedBoard)]="selectedBoard"></board-browser>
 

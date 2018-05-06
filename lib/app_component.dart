@@ -19,9 +19,9 @@ import 'package:meal_planner_frontend/src/common/shoppping_list_item.dart';
   directives: const [NgIf, APP_COMPONENTS],
   providers: const [IngredientService],
 )
-class AppComponent {
+class AppComponent extends AfterViewInit {
 
-  static const bool DEBUG_MODE = true;
+  static const bool DEBUG_MODE = false;
 
   IngredientService _ingredientService;
 
@@ -29,6 +29,7 @@ class AppComponent {
   List<ShoppingListItem> shoppingListItems = [];
   Board selectedBoard = null;
   List<Recipe> selectedRecipes = [];
+  bool loggedIn = false;
 
   AppComponent(this._ingredientService);
 
@@ -77,4 +78,10 @@ class AppComponent {
     ingredientRetrievalStatus = [];
   }
 
+  @override
+  ngAfterViewInit() async {
+    const String _SERVICE_URL = 'https://localhost:8443/status';
+    var string = await HttpRequest.getString(_SERVICE_URL);
+    loggedIn = string == "true";
+  }
 }
